@@ -1,0 +1,40 @@
+---
+version: 0.0.3-alpha-1
+
+
+environment:
+  enabledFeatures: ['testFeature']
+  defaultServices:
+    - name: "lifecycle-dev-test"
+            
+services:
+  - name: 'lifecycle-dev-test'
+    appShort: 'jeffpoc'
+    github:
+      repository: 'zero101010/api-rest-go'
+      branchName: 'main'
+      docker:
+        defaultTag: 'main'
+        pipelineId: 'lifecycle/lc-test'
+        app:
+          dockerfilePath: Dockerfile
+          env:
+            COMPONENT: app
+          ports:
+            - 8080
+      deployment:
+        public: true
+        capacityType: "SPOT"
+        resource:
+          cpu:
+            request: "10m"
+          memory:
+            request: "100Mi"
+        readiness:
+          tcpSocketPort: 8080
+          httpGet:
+            port: 8080
+        hostnames:
+          host: 'lifecycle.dev.goodrx.com'
+          defaultInternalHostname: 'lifecycle-dev-test'
+          defaultPublicUrl: 'lifecycle-dev-test-good-dev-0.lifecycle.dev.goodrx.com'
