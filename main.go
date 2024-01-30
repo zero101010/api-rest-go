@@ -19,7 +19,10 @@ func main() {
 	// router.Use(gin.Logger())
 
 	router.GET("/", func(c *gin.Context) {
-		c.JSON(http.StatusOK, bson.M{"Application": "Lifecycle test", "Status": "Up"})
+		c.JSON(http.StatusOK, bson.M{"Application": " Go test", "Status": "Up", "version": "2"})
+	})
+	router.GET("/test", func(c *gin.Context) {
+		c.JSON(http.StatusOK, bson.M{"test": "Running"})
 	})
 	router.Run(":" + port)
 }
