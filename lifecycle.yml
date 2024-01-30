@@ -4,11 +4,10 @@ version: 0.0.3-alpha-1
 
 environment:
   defaultServices:
-    - name: "lifecycle-go-test"
+    - name: "api-rest-go"
             
 services:
-  - name: 'lifecycle-go-test'
-    appShort: 'zero101010'
+  - name: 'api-rest-go'
     github:
       repository: 'zero101010/api-rest-go'
       branchName: 'zero101010-patch-1'
@@ -17,7 +16,7 @@ services:
         app:
           dockerfilePath: 'sysops/dockerfiles/app.Dockerfile'
           env:
-            PORT: 8080
+            PORT: "8080"
           ports:
             - 8080
       deployment:
