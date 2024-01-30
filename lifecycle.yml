@@ -3,21 +3,19 @@ version: 0.0.3-alpha-1
 
 
 environment:
-  enabledFeatures: ['testFeature']
   defaultServices:
-    - name: "lifecycle-dev-test"
+    - name: "lifecycle-go-test"
             
 services:
-  - name: 'lifecycle-dev-test'
+  - name: 'lifecycle-go-test'
     appShort: 'zero101010'
     github:
       repository: 'zero101010/api-rest-go'
       branchName: 'zero101010-patch-1'
       docker:
         defaultTag: 'main'
-        pipelineId: 'lifecycle/lc-test'
         app:
-          dockerfilePath: Dockerfile
+          dockerfilePath: 'sysops/dockerfiles/Dockerfile'
           env:
             PORT: 8080
           ports:
@@ -33,8 +31,4 @@ services:
         readiness:
           tcpSocketPort: 8080
           httpGet:
-            port: 8080
-        hostnames:
-          host: 'lifecycle.dev.goodrx.com'
-          defaultInternalHostname: 'lifecycle-dev-test'
-          defaultPublicUrl: 'lifecycle-dev-test-good-dev-0.lifecycle.dev.goodrx.com'
+            port: 80
