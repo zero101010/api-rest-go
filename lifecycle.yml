@@ -9,17 +9,17 @@ environment:
             
 services:
   - name: 'lifecycle-dev-test'
-    appShort: 'jeffpoc'
+    appShort: 'zero101010'
     github:
       repository: 'zero101010/api-rest-go'
-      branchName: 'main'
+      branchName: 'zero101010-patch-1'
       docker:
         defaultTag: 'main'
         pipelineId: 'lifecycle/lc-test'
         app:
           dockerfilePath: Dockerfile
           env:
-            COMPONENT: app
+            PORT: 8080
           ports:
             - 8080
       deployment:
