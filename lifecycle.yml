@@ -15,7 +15,7 @@ services:
       docker:
         defaultTag: 'main'
         app:
-          dockerfilePath: 'sysops/dockerfiles/Dockerfile'
+          dockerfilePath: 'sysops/dockerfiles/app.Dockerfile'
           env:
             PORT: 8080
           ports:
