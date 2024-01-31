@@ -12,5 +12,5 @@ FROM alpine
 WORKDIR /app
 
 COPY --from=build-env /go/src/ .
-EXPOSE 8000
+EXPOSE 8080
 ENTRYPOINT [ "./server" ]
