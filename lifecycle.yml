@@ -1,33 +1,30 @@
 ---
-version: 0.0.3-alpha-1
+version: 1.0.0
 
 
 environment:
   defaultServices:
-    - name: "api-rest-go"
+    - name: "api-rest-go-helm"
             
 services:
-  - name: 'api-rest-go'
-    github:
-      repository: 'zero101010/api-rest-go'
-      branchName: 'zero101010-patch-1'
+  - name: "api-rest-go-helm"
+    helm:
+      repository: "zero101010/api-rest-go"
+      branchName: "add-ipAllowList"
+      grpc: true
+      disableIngressHost: false
+      chart:
+        name: 'goodrx-app'
+        valueFiles:
+          - 'sysops/helm/common.yaml'
+          - 'sysops/helm/lfc/service/app.yaml'
       docker:
-        defaultTag: 'main'
+        defaultTag: "main"
         app:
-          dockerfilePath: 'sysops/dockerfiles/app.Dockerfile'
-          env:
-            PORT: "8080"
+          dockerfilePath: "sysops/dockerfiles/app.Dockerfile"
           ports:
             - 8080
-      deployment:
-        public: true
-        capacityType: "SPOT"
-        resource:
-          cpu:
-            request: "10m"
-          memory:
-            request: "100Mi"
-        readiness:
-          tcpSocketPort: 8080
-          httpGet:
-            port: 80
+          env:
+            COMPONENT: "app"
+            ENV: "lifecycle"
+            PORT: "8080"

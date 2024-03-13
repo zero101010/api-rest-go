@@ -1,0 +1,94 @@
+---
+env: lfc                  # Short name of the environment (sbx, stg or prd)
+component: app            # Component name, should be equal to component name in Codefresh pipeline and name of this yml file.
+componentType: server     # Component (server, cron, migrations, etc)
+
+serviceAccount:
+  create: false
+  name: "default"
+
+ports:
+  - name: http
+    protocol: TCP
+    servicePort: 8080
+    containerPort: 8080
+
+ingress:
+  enabled: true
+  port: 8080
+  ipAllowlist:
+    - '0.0.0.0/0'
+
+
+deployment:
+  customNodeAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: eks.amazonaws.com/capacityType
+              operator: In
+              values:
+                - ON_DEMAND
+
+  replicaCount: 1
+
+  terminationGracePeriodSeconds: 300
+  # Resource limits can be tuned according to particular application requirements
+  # https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#resource-units-in-kubernetes
+  resources:
+    requests:
+      cpu: 10m
+      memory: 100Mi
+    limits:
+      memory: 1000Mi
+  # Probe values can be tuned according to particular application requirements
+  # https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/#configure-probes
+  startupProbe:
+    periodSeconds: 5
+    failureThreshold: 60
+    httpGet:
+      scheme: HTTP
+      path: /__lbheartbeat__
+      port: 8090
+
+  readinessProbe:
+    periodSeconds: 10
+    failureThreshold: 3
+    httpGet:
+      scheme: HTTP
+      path: /__lbheartbeat__
+      port: 8090
+
+  livenessProbe:
+    periodSeconds: 60
+    timeoutSeconds: 59
+    failureThreshold: 5
+    httpGet:
+      scheme: HTTP
+      path: /__lbheartbeat__
+      port: 8090
+
+  lifecycle:
+    preStop:
+      exec:
+        command: ["/bin/sh", "-c", "sleep 120"]
+
+  # Slowly rollout new pods during a deployment to
+  # prevent too many being unavailable at any given time
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 5%
+      maxSurge: 100%
+
+  args: ["app", "-config", "/config/config.toml"]
+
+autoscaling:
+  enabled: true
+  minReplicas: 1
+  maxReplicas: 5
+  targetCPUUtilizationPercentage: 60
+
+podDisruptionBudget:
+  enabled: true
+  maxUnavailable: 25%
