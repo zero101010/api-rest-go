@@ -16,8 +16,8 @@ ports:
 ingress:
   enabled: true
   port: 8080
-  # ipAllowlist:
-  #   - '0.0.0.0/0'
+  ipAllowlist:
+    - '0.0.0.0/0'
 
 
 deployment:
@@ -43,30 +43,30 @@ deployment:
       memory: 1000Mi
   # Probe values can be tuned according to particular application requirements
   # https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/#configure-probes
-  startupProbe:
-    periodSeconds: 5
-    failureThreshold: 60
-    httpGet:
-      scheme: HTTP
-      path: /__lbheartbeat__
-      port: 8090
+  # startupProbe:
+  #   periodSeconds: 5
+  #   failureThreshold: 60
+  #   httpGet:
+  #     scheme: HTTP
+  #     path: /__lbheartbeat__
+  #     port: 8090
 
-  readinessProbe:
-    periodSeconds: 10
-    failureThreshold: 3
-    httpGet:
-      scheme: HTTP
-      path: /__lbheartbeat__
-      port: 8090
+  # readinessProbe:
+  #   periodSeconds: 10
+  #   failureThreshold: 3
+  #   httpGet:
+  #     scheme: HTTP
+  #     path: /__lbheartbeat__
+  #     port: 8090
 
-  livenessProbe:
-    periodSeconds: 60
-    timeoutSeconds: 59
-    failureThreshold: 5
-    httpGet:
-      scheme: HTTP
-      path: /__lbheartbeat__
-      port: 8090
+  # livenessProbe:
+  #   periodSeconds: 60
+  #   timeoutSeconds: 59
+  #   failureThreshold: 5
+  #   httpGet:
+  #     scheme: HTTP
+  #     path: /__lbheartbeat__
+  #     port: 8090
 
   lifecycle:
     preStop:
