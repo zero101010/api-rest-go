@@ -18,6 +18,7 @@ ingress:
   port: 8080
   ipAllowlist:
     - '0.0.0.0/0'
+    - '8.8.8.8/8'
 
 
 deployment:
