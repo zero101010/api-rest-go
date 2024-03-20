@@ -1,0 +1,7 @@
+appShort: lc-test
+# Long name of service
+appLong: lc-test
+# Name of ou (engineering or engineering-hipaa)
+ou: engineering
+
+region: us-west-2
