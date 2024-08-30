@@ -8,8 +8,8 @@ environment:
             
 services:
   - name: "api-rest-go-helm"
-    scaleToZeroHttp:
-      enabled: true
+    kedaScaleToZero:
+      type: http
       replicas:
         min: 0
         max: 3
