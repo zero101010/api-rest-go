@@ -23,7 +23,7 @@ services:
           targetValue: 100
     helm:
       repository: "zero101010/api-rest-go"
-      branchName: "add-ipAllowList"
+      branchName: "keda-helm"
       grpc: true
       disableIngressHost: false
       overrideDefaultIpWhitelist: true
