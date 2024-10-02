@@ -30,7 +30,6 @@ deployment:
               values:
                 - ON_DEMAND
 
-  replicaCount: 0
 
   terminationGracePeriodSeconds: 300
   # Resource limits can be tuned according to particular application requirements
@@ -85,9 +84,6 @@ deployment:
 
 autoscaling:
   enabled: false
-  minReplicas: 1
-  maxReplicas: 5
-  targetCPUUtilizationPercentage: 60
 
 podDisruptionBudget:
   enabled: true
