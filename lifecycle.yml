@@ -10,7 +10,7 @@ services:
   - name: "api-rest-go-helm"
     helm:
       repository: "zero101010/api-rest-go"
-      branchName: "add-ipAllowList"
+      branchName: "keda-without-scale"
       grpc: true
       disableIngressHost: false
       overrideDefaultIpWhitelist: true
