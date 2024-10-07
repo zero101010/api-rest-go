@@ -21,6 +21,8 @@ ingress:
 
 
 deployment:
+  env:
+    APP: "TEST"
   customNodeAffinity:
     requiredDuringSchedulingIgnoredDuringExecution:
       nodeSelectorTerms:
