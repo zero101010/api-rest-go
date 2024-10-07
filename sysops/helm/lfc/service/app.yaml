@@ -22,7 +22,8 @@ ingress:
 
 deployment:
   env:
-    COMPONENT: "TEST"
+    COMPONENT: "test"
+    ENV: "lifecycle"
   customNodeAffinity:
     requiredDuringSchedulingIgnoredDuringExecution:
       nodeSelectorTerms:
