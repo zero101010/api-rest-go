@@ -22,7 +22,7 @@ ingress:
 
 deployment:
   env:
-    APP: "TEST"
+    COMPONENT: "TEST"
   customNodeAffinity:
     requiredDuringSchedulingIgnoredDuringExecution:
       nodeSelectorTerms:
