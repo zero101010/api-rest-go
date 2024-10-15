@@ -10,12 +10,12 @@ serviceAccount:
 ports:
   - name: http
     protocol: TCP
-    servicePort: 8080
-    containerPort: 8080
+    servicePort: 80
+    containerPort: 80
 
 ingress:
   enabled: true
-  port: 8080
+  port: 80
   ipAllowlist:
     - '0.0.0.0/0'
 
@@ -30,7 +30,6 @@ deployment:
               values:
                 - ON_DEMAND
 
-  replicaCount: 1
 
   terminationGracePeriodSeconds: 300
   # Resource limits can be tuned according to particular application requirements
@@ -84,10 +83,7 @@ deployment:
   args: ["app", "-config", "/config/config.toml"]
 
 autoscaling:
-  enabled: true
-  minReplicas: 1
-  maxReplicas: 5
-  targetCPUUtilizationPercentage: 60
+  enabled: false
 
 podDisruptionBudget:
   enabled: true
