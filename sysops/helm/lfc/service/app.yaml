@@ -10,12 +10,12 @@ serviceAccount:
 ports:
   - name: http
     protocol: TCP
-    servicePort: 8080
-    containerPort: 8080
+    servicePort: 80
+    containerPort: 80
 
 ingress:
   enabled: true
-  port: 8080
+  port: 80
   ipAllowlist:
     - '0.0.0.0/0'
 
