@@ -26,8 +26,8 @@ services:
         app:
           dockerfilePath: "sysops/dockerfiles/app.Dockerfile"
           ports:
-            - 8080
+            - 80
           env:
             COMPONENT: "app"
             ENV: "lifecycle"
-            PORT: "8080"
+            PORT: "80"
