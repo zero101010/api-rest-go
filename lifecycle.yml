@@ -14,7 +14,6 @@ services:
         min: 0
         max: 3
       scaledownPeriod: 300
-      maxRetries: 5
       scalingMetric: # requestRate and concurrency are mutually exclusive
         requestRate:
           granularity: 1m
