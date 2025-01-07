@@ -15,12 +15,11 @@ services:
         max: 3
       scaledownPeriod: 300
       maxRetries: 5
-      scalingMetric: # requestRate and concurrency are mutually exclusive
+      scalingMetric: 
         requestRate:
           granularity: 1m
           targetValue: 100
           window: 1m
-
     helm:
       repository: "zero101010/api-rest-go"
       branchName: "keda-helm"
