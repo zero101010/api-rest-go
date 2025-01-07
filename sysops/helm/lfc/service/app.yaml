@@ -83,7 +83,7 @@ deployment:
   args: ["app", "-config", "/config/config.toml"]
 
 autoscaling:
-  enabled: false
+  enabled: true
 
 podDisruptionBudget:
   enabled: true
