@@ -24,8 +24,6 @@ services:
       repository: "zero101010/api-rest-go"
       branchName: "keda-helm"
       grpc: true
-      disableIngressHost: false
-      overrideDefaultIpWhitelist: true
       chart:
         name: 'goodrx-app'
         valueFiles:
