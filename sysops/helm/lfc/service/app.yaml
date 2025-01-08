@@ -16,8 +16,6 @@ ports:
 ingress:
   enabled: true
   port: 8080
-  ipAllowlist:
-    - '0.0.0.0/0'
 
 
 deployment:
@@ -83,7 +81,7 @@ deployment:
   args: ["app", "-config", "/config/config.toml"]
 
 autoscaling:
-  enabled: false
+  enabled: true
 
 podDisruptionBudget:
   enabled: true
