@@ -23,7 +23,6 @@ services:
     helm:
       repository: "zero101010/api-rest-go"
       branchName: "keda-helm"
-      grpc: true
       chart:
         name: 'goodrx-app'
         valueFiles:
