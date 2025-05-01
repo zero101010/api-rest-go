@@ -1,5 +1,5 @@
 ---
-version: 1.1.1
+version: 1.2.0
 
 
 environment:
@@ -8,19 +8,6 @@ environment:
             
 services:
   - name: "api-rest-go-helm"
-    kedaScaleToZero:
-      type: http
-      replicas:
-        min: 0
-        max: 4
-      scaledownPeriod: 300
-      scalingMetric: # requestRate and concurrency are mutually exclusive
-        requestRate:
-          granularity: 1s
-          targetValue: 100
-          window: 1m
-        concurrency:
-          targetValue: 100
     helm:
       repository: "zero101010/api-rest-go"
       branchName: "add-ipAllowList"
