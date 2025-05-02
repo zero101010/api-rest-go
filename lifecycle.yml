@@ -1,10 +1,11 @@
 ---
-version: 1.1.1
+version: 1.2.0
 
 
 environment:
   defaultServices:
     - name: "api-rest-go-helm"
+    - name: "second-service"
             
 services:
   - name: "api-rest-go-helm"
@@ -30,24 +31,24 @@ services:
             ENV: "lifecycle"
             PORT: "8080"
   - name: "second-service"
-      helm:
-        repository: "zero101010/api-rest-go"
-        branchName: "master"
-        grpc: true
-        disableIngressHost: false
-        overrideDefaultIpWhitelist: true
-        chart:
-          name: 'goodrx-app'
-          valueFiles:
-            - 'sysops/helm/common.yaml'
-            - 'sysops/helm/lfc/service/app.yaml'
-        docker:
-          defaultTag: "main"
-          app:
-            dockerfilePath: "sysops/dockerfiles/app.Dockerfile"
-            ports:
-              - 8080
-            env:
-              COMPONENT: "app"
-              ENV: "lifecycle"
-              PORT: "8080"
+    helm:
+      repository: "zero101010/api-rest-go"
+      branchName: "master"
+      grpc: true
+      disableIngressHost: false
+      overrideDefaultIpWhitelist: true
+      chart:
+        name: 'goodrx-app'
+        valueFiles:
+          - 'sysops/helm/common.yaml'
+          - 'sysops/helm/lfc/service/app.yaml'
+      docker:
+        defaultTag: "main"
+        app:
+          dockerfilePath: "sysops/dockerfiles/app.Dockerfile"
+          ports:
+            - 8080
+          env:
+            COMPONENT: "app"
+            ENV: "lifecycle"
+            PORT: "8080"
