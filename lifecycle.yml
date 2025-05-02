@@ -8,22 +8,9 @@ environment:
             
 services:
   - name: "api-rest-go-helm"
-    kedaScaleToZero:
-      type: http
-      replicas:
-        min: 0
-        max: 4
-      scaledownPeriod: 300
-      scalingMetric: # requestRate and concurrency are mutually exclusive
-        requestRate:
-          granularity: 1s
-          targetValue: 100
-          window: 1m
-        concurrency:
-          targetValue: 100
     helm:
       repository: "zero101010/api-rest-go"
-      branchName: "add-ipAllowList"
+      branchName: "master"
       grpc: true
       disableIngressHost: false
       overrideDefaultIpWhitelist: true
@@ -42,3 +29,25 @@ services:
             COMPONENT: "app"
             ENV: "lifecycle"
             PORT: "8080"
+  - name: "second-service"
+      helm:
+        repository: "zero101010/api-rest-go"
+        branchName: "master"
+        grpc: true
+        disableIngressHost: false
+        overrideDefaultIpWhitelist: true
+        chart:
+          name: 'goodrx-app'
+          valueFiles:
+            - 'sysops/helm/common.yaml'
+            - 'sysops/helm/lfc/service/app.yaml'
+        docker:
+          defaultTag: "main"
+          app:
+            dockerfilePath: "sysops/dockerfiles/app.Dockerfile"
+            ports:
+              - 8080
+            env:
+              COMPONENT: "app"
+              ENV: "lifecycle"
+              PORT: "8080"
